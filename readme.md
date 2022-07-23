@@ -1,22 +1,49 @@
 
-## image processing API
+## shop api
 
-this is a nodejs api for making some image processing such as resize image and so on , i use here expressjs and jasmine.
+this is a nodejs api for making some online store operation like create order, product so on , I use here Expressjs, jwt and jasmine.
 
-### for run it : 
+### for running it : 
 1- npm i
 
-2- npm run lint
- - to make sure everything is good
+2- npm run start
 
-3- npm run start
+3- create .env file with these keys : 
 
- 4- we have 3 images name : [ cat, rabbit, caw]... use any name of them as "name" parameters with "width" and "hieght"
+PORT=3000
 
-5- our endpoint is http://localhost:3000/api/image/resize
+POSTGRES_HOST=
 
- 6- example: 
+POSTGRES_PORT=
 
- http://localhost:3000/api/image/resize?name=cat&width=450&hieght=300
+POSTGRES_DB=
 
- 7- npm run test 
+POSTGRES_DB_TEST=
+
+POSTGRES_USER=
+
+POSTGRES_PASSWORD=
+
+ex: 
+
+PORT=3000
+
+POSTGRES_HOST=localhost
+
+POSTGRES_PORT=5432
+
+POSTGRES_DB=shopping
+
+POSTGRES_DB_TEST=shopping_test
+
+POSTGRES_USER=postgres
+
+POSTGRES_PASSWORD=postgres 
+
+4- run -> db-migrate up
+- to migrate DB files
+
+5- hit -> http://localhost:3000/push-data
+ - to add fake data 
+
+6- still working on it
