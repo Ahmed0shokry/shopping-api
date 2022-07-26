@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express'
 
 const index = async (req: Request, res: Response) => {
     try {
-        const orders = await (new OrderModel()).index();
+        const orders = await (new OrderModel()).index(parseInt(<string>req.query.user_id));
         res.send(orders);
     } catch (error) {
         res.status(500).json(error);
