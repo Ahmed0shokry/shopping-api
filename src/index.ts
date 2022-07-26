@@ -3,6 +3,9 @@ import morgan from 'morgan'
 import * as env from 'dotenv'
 import db from './database'
 import * as queries from './data'
+import productsRoutes from './handlers/Product'
+import usersRoutes from './handlers/User'
+import ordersRoutes from './handlers/Order'
 
 function getPort() {
   env.config()
@@ -15,10 +18,16 @@ const app = express()
 
 //use libs
 app.use(morgan('dev'))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'welcome to our shopping api project ^_^' })
 })
+
+productsRoutes(app);
+usersRoutes(app);
+ordersRoutes(app);
 
 app.get('/push-data',  (req: Request, res: Response)=>{
   insertUsers();
