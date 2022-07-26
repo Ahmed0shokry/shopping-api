@@ -2,9 +2,8 @@ import client from '../database';
 
 export type Order = {
     id?: number;
-    status?: number;
-    product_id?: number,
-    quantity?: number,
+    status: number;
+    products?: Array<{product_id: number, quantity:number}>,
     user_id: number;
 };
 
@@ -26,13 +25,13 @@ export class OrderModel {
     async show(id: number): Promise<Order> {
         try {
             const connection = await client.connect();
-            const query = `
-                SELECT orders.id as id, status, quantity, product_id 
-                FROM orders join order_product 
-                WHERE orders.id=(${id}) and order_product.order_id = (${id}) `;
-            const result = await connection.query(query, [id]);
+            let query = `SELECT id, status, user_id FROM orders WHERE orders.id=($1)`;
+            const orders = await connection.query(query, [id]);
+            query = `SELECT quantity, product_id FROM order_product WHERE order_id=($1)`;
+            const products = await connection.query(query, [id]);
             connection.release();
-            return result.rows[0];
+            orders.rows[0]['products'] = products.rows;
+            return orders.rows[0];
         } catch (error) {
             throw new Error(
                 `Failed to get that order, error: ${error}`
@@ -43,7 +42,7 @@ export class OrderModel {
     async create(order: Order): Promise<Order> {
         try {
             const connection = await client.connect();
-            const query = 'INSERT INTO orders (name, user_id) VALUES($1, $2) RETURNING *';
+            const query = 'INSERT INTO orders (status, user_id) VALUES($1, $2) RETURNING *';
             const result = await connection.query(query, [order.status, order.user_id]);
             connection.release();
             return result.rows[0];
