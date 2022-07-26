@@ -8,42 +8,20 @@ this is a nodejs api for making some online store operation like create order, p
 
 2- npm run start
 
-3- create .env file with these keys : 
+3- create .env file
 
-PORT=3000
-
-POSTGRES_HOST=
-
-POSTGRES_PORT=
-
-POSTGRES_DB=
-
-POSTGRES_DB_TEST=
-
-POSTGRES_USER=
-
-POSTGRES_PASSWORD=
-
-ex: 
-
-PORT=3000
-
-POSTGRES_HOST=localhost
-
-POSTGRES_PORT=5432
-
-POSTGRES_DB=shopping
-
-POSTGRES_DB_TEST=shopping_test
-
-POSTGRES_USER=postgres
-
-POSTGRES_PASSWORD=postgres 
+    -i put an example.env file to know all keys I used.
 
 4- run -> db-migrate up
-- to migrate DB files
 
-5- hit -> http://localhost:3000/push-data
- - to add fake data 
+    - to migrate DB files
 
-6- still working on it
+5- hit link -> http://localhost:3000/push-data
+
+    - to add fake data 
+
+6- take a look to REQUIREMENTS.md to use my endpoints.
+
+##important note 
+
+    -if you use post man to test, set Body to x-www-form-urlencoded in POST  request.
