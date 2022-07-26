@@ -1,7 +1,7 @@
 {
-  "name": "image_processing_api",
+  "name": "shopping_store_api_project",
   "version": "1.0.0",
-  "description": "it make some process on images like resize and so on",
+  "description": "it supply a shop with crud operations api for orders, products and so on",
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch './**/*.ts' --exec 'ts-node' ./src/index.ts",
@@ -11,7 +11,8 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --write 'src/**/*.ts'",
     "test": "npx tsc && jasmine",
-    "jasmine": "jasmine"
+    "jasmine": "jasmine",
+    "watch": "npm-watch"
   },
   "keywords": [],
   "author": "",
@@ -35,7 +36,9 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/pg": "^8.6.5",
+    "bcrypt": "^5.0.1",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.1",
@@ -43,6 +46,7 @@
     "jasmine": "^4.2.1",
     "jasmine-spec-reporter": "^7.0.0",
     "morgan": "^1.10.0",
+    "npm-watch": "^0.11.0",
     "pg": "^8.7.3",
     "sharp": "^0.30.7",
     "supertest": "^6.2.3"
