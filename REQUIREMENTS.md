@@ -8,28 +8,29 @@ These are the notes from a meeting with the frontend developer that describe wha
 ### **Products**
 
 
-| End Point	| Description | Method | Parameters |Example |Request Body |
-| --------- | ----------- | ------ | ---------- | ------ | ----------- |
-| Index | Index of all products | GET | none | yourDomainName/products |
-| Show | Shows a single product by id | GET | :id  | yourDomainName/products/1 |
-| Create | Creates new product |POST |none  | yourDomainName/products |{"name": "product one","price": 200}      
+| End Point	| Description | Method | token required | Parameters |Example |Request Body |
+| --------- | ----------- | ------ | ------ |---------- | ------ | ----------- |
+| Index | Index of all products | GET | no | none | yourDomainName/products |
+| Show | Shows a single product by an id | GET | no | :id  | yourDomainName/products/1 |
+| Create | Creates new a product |POST | yes |none  | yourDomainName/products |{"name": "product one","price": 200}      
 
 
 ### **Users**
 
-| End Point | Description | Method |Parameters |Example |Request Body |
-|--------- | ----------- | ------ | ---------- | ------ | ----------- |
-| Index     | Index of all users       				|GET        |none                  |yourDomainName/users 		|
-| Show      | Shows a user by id |GET |:id  |yourDomainName/users/1	    |
-| Create    |Creates new user	|POST       |none                  |yourDomainName/users		    |{"firstname": "ahmed","lastname": "shokry","password": "your password"}
+| End Point | Description | Method | token required |Parameters |Example |Request Body |
+|--------- | ----------- | ------ | ------|---------- | ------ | ----------- |
+| Index     | Index of all users       				|GET | yes       |none                  |yourDomainName/users 		|
+| Show      | Shows a user by id |GET | yes   |:id  |yourDomainName/users/1	    |
+| Create    |Creates new user	|POST  | yes        |none                  |yourDomainName/users		    |{"firstname": "ahmed","lastname": "shokry","password": "your password"}
+| Login    |Login a user	|POST      | no    |none                  |yourDomainName/users/login		    |{"firstname": "ahmed","lastname": "shokry","password": "your password"}
 
 ### **Orders**
 
-| End Point	| Description | Method    |Parameters	|Example    						|Request Body| query parameters
-| --------- | ----------- | ---------- | ----------| ------ | ----------- |-----------|
-| Index     |index of all orders by user	|GET        |none                   |yourDomainName/orders?user_id=1		        | |{"user_id" : 1}
-| Show      |show one user's order include products |GET        |:id                    |yourDomainName/orders/1	            | |
-| Create    |Creates new order       				|POST       |none                   |yourDomainName/orders		        |{"status": 1, "user_id" : 1} |
+| End Point	| Description | Method    | token required |Parameters	|Example    						|Request Body| query parameters
+| --------- | ----------- | ---------- | ------ |----------| ------ | ----------- |-----------|
+| Index     |index of all orders by user	|GET | yes       |none                   |yourDomainName/orders?user_id=1		        | |{"user_id" : 1}
+| Show      |show one user's order include products |GET | yes       |:id                    |yourDomainName/orders/1	            | |
+| Create    |Creates new order       				|POST | yes      |none                   |yourDomainName/orders		        |{"status": 1, "user_id" : 1} |
 
 ## Data Shapes
 #### **product**

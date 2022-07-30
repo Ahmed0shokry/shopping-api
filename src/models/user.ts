@@ -5,8 +5,8 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 export type User = {
     id?: number;
-    firstName: string,
-    lastName: string,
+    firstname: string,
+    lastname: string,
     password: string
 };
 
@@ -42,8 +42,8 @@ export class UserModel {
     async create(user: User): Promise<User> {
         try {
             const connection = await client.connect();
-            const sql = `INSERT INTO users (firstName , lastName, password) values ($1 , $2 , $3 ) returning *`;
-            const result = await connection.query(sql, [user.firstName, user.lastName, this.hash(user.password)]);
+            const sql = `INSERT INTO users (firstname , lastname, password) values ($1 , $2 , $3 ) returning *`;
+            const result = await connection.query(sql, [user.firstname, user.lastname, this.hash(user.password)]);
             connection.release();
             return result.rows[0];
         } catch (error) {
@@ -55,5 +55,21 @@ export class UserModel {
     hash(password: string) {
         const salt = parseInt(process.env.SALT_ROUNDS as string, 10)
         return bcrypt.hashSync(`${password}${process.env.BCRYPT_PASSWORD}`, salt)
+    }
+
+    async login(user: User): Promise<number> {
+        try {
+            const connection = await client.connect();
+            const sql = `SELECT * FROM users WHERE firstname = ($1) and lastname = ($2)`
+            const result = await connection.query(sql, [user.firstname, user.lastname]);
+            connection.release();
+            if (!result.rows.length) throw new Error(`user not found`);
+            const isValid = bcrypt.compareSync(user.password + process.env.BCRYPT_PASSWORD, result.rows[0].password)
+            if (!isValid) throw new Error(`ser data are wrong`);
+            return result.rows[0].id as number;
+        }
+         catch (error) {
+            throw new Error(`Failed to login with that user, Error: ${error}`)
+        }
     }
 }

@@ -22,6 +22,19 @@ this is a nodejs api for making some online store operation like create order, p
 
 6- take a look to REQUIREMENTS.md to use my endpoints.
 
-##important note 
+7- to generate a token you have to login or create user ,so to test you can log in for example : 
+
+    -hit this link  (with POST method) : http://localhost:3000/users/login 
+ 
+    -request body{ 
+ 
+    firstname:Hossam
+ 
+    lastname:Abubakr
+ 
+    password:123456
+ 
+    }
+important note 
 
     -if you use post man to test, set Body to x-www-form-urlencoded in POST  request.

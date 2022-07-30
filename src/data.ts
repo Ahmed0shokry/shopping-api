@@ -1,15 +1,23 @@
+import bcrypt from "bcrypt";
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 export function insertUsers(): string {
-
+    const password = hashPassword('123456');
    return `
 
 INSERT INTO users (firstName, lastName, password) VALUES 
-('Hossam', 'Abubakr', '123456'),
-('Mohammed', 'Elzanaty', '123456'),
-('Amr', 'Hassan', '123456'),
-('Ziyad', 'Khalil', '123456');
+('Hossam', 'Abubakr', '${password}'),
+('Mohammed', 'Elzanaty', '${password}'),
+('Amr', 'Hassan', '${password}'),
+('Ziyad', 'Khalil', '${password}');
 `;
+}
 
+function hashPassword(password: string) {
+    const salt = parseInt(process.env.SALT_ROUNDS as string, 10)
+    return bcrypt.hashSync(`${password}${process.env.BCRYPT_PASSWORD}`, salt)
 }
 export function insertProducts(): string {
     return `

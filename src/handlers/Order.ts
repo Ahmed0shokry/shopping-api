@@ -1,5 +1,6 @@
 import {Order, OrderModel} from '../models/order'
 import express, { Request, Response } from 'express'
+import {verifyToken} from '../helpers/JWT'
 
 const index = async (req: Request, res: Response) => {
     try {
@@ -11,6 +12,7 @@ const index = async (req: Request, res: Response) => {
 };
 
 const show = async (req: Request, res: Response) => {
+    verifyToken(req)
     try {
         const id = Number(req.params.id);
         const order = await (new OrderModel()).show(id);
@@ -21,6 +23,7 @@ const show = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
+    verifyToken(req);
     try {
         const { status, user_id } = req.body;
         const order = await (new OrderModel()).create( <Order>({status: status, user_id: user_id}) );

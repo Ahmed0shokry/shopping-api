@@ -1,5 +1,6 @@
 import {Product, ProductModel} from '../models/product';
 import express, { Request, Response } from 'express';
+import {verifyToken} from "../helpers/JWT";
 
 
 const index = async (req: Request, res: Response) => {
@@ -22,7 +23,7 @@ const show = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
-
+    verifyToken(req)
     try {
         const { name, price } = req.body;
         const product = await (new ProductModel()).create( <Product>({name: name, price: price}) );
