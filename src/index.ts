@@ -31,14 +31,16 @@ ordersRoutes(app);
 
 app.get('/push-data',  (req: Request, res: Response)=>{
   insertUsers();
+  return res.json('done pushing data');
 });
 
 function insertUsers():void {
   db.connect().then((client) => {
      client.query(queries.insertUsers()).then((res) => {
       client.release()
-       insertProducts()
-    })
+         insertOrders()
+         return;
+     })
   })
 }
 
@@ -47,7 +49,8 @@ function insertProducts(): void{
   db.connect().then((client) => {
      client.query(queries.insertProducts()).then((res) => {
       client.release()
-       insertOrders()
+      insertProductsInOrders();
+         return;
     })
   })
 }
@@ -56,8 +59,9 @@ function insertProducts(): void{
 function insertOrders(): void{
   db.connect().then((client) => {
      client.query(queries.insertOrders()).then((res) => {
-      client.release()
-       insertProductsInOrders();
+         insertProducts()
+         client.release()
+         return;
     })
   })
 }
@@ -67,8 +71,10 @@ function insertProductsInOrders(): void{
   db.connect().then((client) => {
      client.query(queries.insertProductsInOrders()).then((res) => {
       client.release()
+         return;
     })
   })
+
 }
 
 
