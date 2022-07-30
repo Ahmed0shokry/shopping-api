@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express'
 import {verifyToken} from '../helpers/JWT'
 
 const index = async (req: Request, res: Response) => {
+    verifyToken(req);
     try {
         const orders = await (new OrderModel()).index(parseInt(<string>req.query.user_id));
         res.send(orders);
