@@ -36,7 +36,7 @@ this is a nodejs api for making some online store operation like create order, p
  
     }
     
-8-for testing, be sure first you pushed the fake data then run: 
+8- for testing, be sure first you change "ENV" key in .env to "test" , then  you pushed the fake data, last thing you run: 
 
     -npm run test     
     
