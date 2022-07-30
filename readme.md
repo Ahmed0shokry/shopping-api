@@ -35,6 +35,11 @@ this is a nodejs api for making some online store operation like create order, p
     password:123456
  
     }
+    
+8-for testing, be sure first you pushed the fake data then run: 
+
+    -npm run test     
+    
 important note 
 
     -if you use post man to test, set Body to x-www-form-urlencoded in POST  request.
