@@ -41,7 +41,6 @@ describe('test user endpoints', () => {
     it('returns valid token and user data if created users successfully ', async () => {
         await request
             .post('/users')
-            .set('Authorization', 'Bearer ' + token)
             .send(user2)
             .expect(200)
             .then( (res)=> {

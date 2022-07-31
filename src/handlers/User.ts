@@ -24,7 +24,6 @@ const show = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
-    verifyToken(req);
     try {
         const { firstname, lastname, password } = req.body;
         const user = await (new UserModel()).create( <User>({firstname: firstname, lastname: lastname, password: password}) );
