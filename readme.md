@@ -6,9 +6,21 @@ this is a nodejs api for making some online store operation like create order, p
 ### for running it : 
 1- to install all packages please run :
  
-    -npm i
+    -npm install
      
-2- create two separated databases , one for testing and normal database.
+2- create two separated databases , one for testing and another for production using postgresql:
+
+-to connect to it, plase run these commands in terminal:
+
+>sudo -u postgres psql
+
+> ENTER PASSWORD
+
+>CREATE DATABASE database_name;
+
+>CREATE DATABASE database_name_test;
+
+-note: database default port to connect is: 5432 
        
 3- create .env file:
 
@@ -63,7 +75,13 @@ this is a nodejs api for making some online store operation like create order, p
     
 8- for testing, be sure first you change "ENV" key in .env to "test" , then  you pushed the fake data (step no. 5), last thing you run: 
 
-    -npm run test     // it will run  -> npx tsc && jasmine
+    -change "ENV" key in .env to "test"
+    
+    - run > db-migrate up
+    
+    -hit link (http://youServerName:3000/push-data) //like step number 2 to add fake data
+    
+    -run > npm run test     // it will run  -> npx tsc && jasmine
     
 important note 
 
