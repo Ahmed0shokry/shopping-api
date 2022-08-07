@@ -77,7 +77,7 @@ this is a nodejs api for making some online store operation like create order, p
 
     -change "ENV" key in .env to "test"
     
-    - run > db-migrate up
+    - run > db-migrate --env test  up
     
     -hit link (http://youServerName:3000/push-data) //like step number 2 to add fake data
     

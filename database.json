@@ -1,4 +1,5 @@
 {
+  "default_env":{"ENV":"ENV"},
   "dev": {
     "driver":"pg",
     "host":{"ENV":"POSTGRES_HOST"},
