@@ -10,7 +10,7 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix",
     "format": "prettier --write 'src/**/*.ts'",
-    "test": "npx tsc && jasmine",
+     "test": " db-migrate --env test reset && set ENV=test && db-migrate --env test up && npx tsc && jasmine ",
     "jasmine": "jasmine",
     "watch": "npm-watch"
   },

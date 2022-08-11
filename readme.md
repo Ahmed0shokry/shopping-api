@@ -73,15 +73,9 @@ this is a nodejs api for making some online store operation like create order, p
  
     }
     
-8- for testing, be sure first you change "ENV" key in .env to "test" , then  you pushed the fake data (step no. 5), last thing you run: 
+8- for testing:
 
-    -change "ENV" key in .env to "test"
-    
-    - run > db-migrate --env test  up
-    
-    -hit link (http://youServerName:3000/push-data) //like step number 2 to add fake data
-    
-    -run > npm run test     // it will run  -> npx tsc && jasmine
+    -run > npm run test  
     
 important note 
 

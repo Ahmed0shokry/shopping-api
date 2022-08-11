@@ -1,10 +1,10 @@
 import {Order, OrderModel} from '../../models/order'
-import {User} from '../../models/user'
+import {User, UserModel} from '../../models/user'
 
 const user: User = {
     id: 1,
-    firstname: 'Hossam',
-    lastname: 'Abubakr',
+    firstname: 'said',
+    lastname: 'ali',
     password: '123456'
 }
 const order: Order = {
@@ -12,7 +12,12 @@ const order: Order = {
     user_id: user.id as number
 };
 
+
 describe('test order model', () => {
+
+    beforeAll(async ()=>{
+        user.id =  (await (new UserModel()).create(user)).id;
+    })
 
     it('return order if it created successfully', async () => {
         const newOrder = await (new OrderModel()).create(order);

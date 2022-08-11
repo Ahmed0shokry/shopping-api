@@ -1,7 +1,8 @@
 import supertest from 'supertest'
 import app from '../index'
 import { User } from '../models/user'
-import {Product} from '../models/product'
+import {Product, ProductModel} from '../models/product'
+import client from "../database";
 
 const request = supertest(app)
 
@@ -20,7 +21,7 @@ describe('test product endpoints', () => {
 
     beforeAll(async () => {
         await request
-            .post('/users/login')
+            .post('/users')
             .send(user)
             .then((res) => {
                 token = res.body.token
@@ -40,6 +41,7 @@ describe('test product endpoints', () => {
     })
 
     it('returns all products ', async () => {
+        await (new ProductModel()).create(product);
         await request
             .get('/products')
             .send()
@@ -50,10 +52,18 @@ describe('test product endpoints', () => {
     })
 
     it('shows a product', async () => {
+        await (new ProductModel()).create(product);
         await request
             .get('/products/1')
             .send()
             .expect(200)
+    })
+
+    afterAll(async () => {
+        const dbCon = await client.connect()
+        await dbCon.query('truncate table users cascade;')
+        await dbCon.query('alter sequence users_id_seq RESTART WITH 1')
+        await dbCon.release()
     })
 
 

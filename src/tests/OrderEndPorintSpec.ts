@@ -1,15 +1,16 @@
 import supertest from 'supertest'
 import app from '../index'
-import { User } from '../models/user'
-import { Order } from '../models/order'
+import {User, UserModel} from '../models/user'
+import {Order, OrderModel} from '../models/order'
+import client from "../database";
 
 const request = supertest(app)
 
 describe('test product endpoints', () => {
     const user: User = {
         id: 1,
-        firstname: 'Hossam',
-        lastname: 'Abubakr',
+        firstname: 'tamer',
+        lastname: 'magdi',
         password: '123456'
     }
     const order: Order = {
@@ -19,6 +20,7 @@ describe('test product endpoints', () => {
     let token = '';
 
     beforeAll(async () => {
+        await (new UserModel()).create(user);
         await request
             .post('/users/login')
             .send(user)
@@ -37,6 +39,7 @@ describe('test product endpoints', () => {
     })
 
     it('returns all orders for specific user', async () => {
+        await (new OrderModel()).create(order);
         await request
             .get('/orders?user_id=' + user.id)
             .set('Authorization', 'Bearer ' + token)
@@ -55,5 +58,10 @@ describe('test product endpoints', () => {
             .expect(200)
     })
 
-
+    afterAll(async () => {
+        const dbCon = await client.connect()
+        await dbCon.query('truncate table users cascade;')
+        await dbCon.query('alter sequence users_id_seq RESTART WITH 1')
+        await dbCon.release()
+    })
 })

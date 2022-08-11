@@ -1,8 +1,8 @@
 import {User, UserModel} from '../../models/user'
 
 const user: User = {
-    firstname: 'Hossam',
-    lastname: 'Abubakr',
+    firstname: 'khaled',
+    lastname: 'ali',
     password: '123456'
 }
 
